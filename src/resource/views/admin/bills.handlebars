@@ -1,0 +1,122 @@
+
+<div class="container" style="" >
+  <div class="row">
+    <div class="col"> {{!-- phan input search san pham va so luong --}} 
+      <form method="get" action="/adminmanage/bills/find" style="padding:2%;float:left;">
+      <div class="input-group">
+        <div class="col-xs-3" style="margin-top: 110px;">
+          <h1><a href='/adminmanage' style="color:black";> go back</a></h1> 
+            <h3 for="productName" class="form-label">Searching product</h3>
+            <input type="text" class="form-control" style="text-transform: lowercase" name="product_name" placeholder="Enter your Product name">
+            <button type="submit" class="btn1 btn-outline-dark" id="submitbutton"><i class="fas fa-search" ></i>Find Product</button>
+            <button type="button" class="btn1 btn-outline-dark" onclick="myFunction()">Show</button>
+        </div>
+      </div>
+
+      <div id="myDIV" style="padding:2%">
+        {{#if data}}
+        <table class="table table-dark table-hover table-scroll table-striped">
+          <thead>
+            <tr>
+                <th class="name">Product Name</th>
+                <th class="qty">Qty</th>
+                <th class="price">Price</th>
+                <th class="add">to cart</th>
+            </tr>
+        </thead> </table>
+        
+          <div class="table-wrapper-scroll-y my-custom-scrollbar"> 
+          <table class="table table-dark table-hover table-scroll table-striped">
+        <tbody>
+          {{#each data }}
+            <tr>
+                <td class="name">{{this.product_name}}</td>
+                <td class="qty">{{this.stock}}</td>
+                <td class="price">{{this.price}}$</td>
+                <td><a href="add/{{this._id}}">add to cart</a></td>
+            </tr>
+          {{/each}}
+       </tbody>
+       </table>
+          {{else}}
+        <h2>search the right product to show</h2>
+          {{/if}}
+      </div>
+      </form>
+    </div>
+  </div>
+  <div class="col" style="margin-top:10%">  {{!-- phan bill  --}}
+    {{#if cartitem}}
+      <div class="table-wrapper-scroll-y my-custom-scrollbar"> 
+          <table class="table table-dark table-hover table-scroll table-striped">
+        <thead>
+            <tr>
+                <th class="name">Product Name</th>
+                <th class="qty">Quantity</th>
+                <th class="price">Unit Price</th>
+                <th >modify</th>
+            </tr>
+        </thead>
+        <tbody>
+          <form method="post" action="/adminmanage/printbill">
+          {{#each cartitem}}
+            <tr>
+              {{!-- these hidden input could be submit to create a bill but im too lazy for that so i will just store time date and price --}}
+                {{!-- <input type="hidden" name="product_name" value="{{this.product_name}}"> --}}
+                <td class="name">{{this.product_name}}</td>
+                {{!-- <input type="hidden" name="quantity" value="{{this.quantity}}"> --}}
+                <td class="qty">{{this.quantity}}</td>
+                {{!-- <input type="hidden" name="price" value="{{this.price}}"> --}}
+                <td class="price">{{this.price}}</td>
+                <input type="hidden" name="object" value="{{jsonify this}}">
+                <td><a href='/adminmanage/bills/delcart/{{this._id}}'>delete</a> <i class="fas fa-trash"></i></td>
+            </tr>
+          {{/each}}
+        </tbody>
+          </table>            
+      </div>
+        <table class="table table-dark table-hover clear" >
+              <tbody>
+                <tr>
+                  <td class="">
+                       <strong>Subtotal</strong>
+                   </td>
+                                    
+                   <td class="right">{{calculate cartitem}}</td>
+                    <input type="hidden" name="total_price" value="{{calculate cartitem}}">
+                  </tr>
+            </tbody>  
+        </table>    
+        <div class="bill button" style="display: flex;justify-content: space-between;">
+           <button type="button" class="btn-outline-dark" ><a href="/adminmanage/bills/clear">clear</a></button> 
+          <button type="submit" class="btn-outline-dark" id="createbutton"><i  ></i>Create Bill</button> 
+
+          </form>
+        </div>
+             
+      {{else}}
+        <table class="table table-dark table-hover">
+        <thead>
+            <tr>
+                <th class="table-dark">Product Name</th>
+                <th class="table-dark">Quantity</th>
+                <th class="table-dark">Unit Price</th>
+                <th >modify</th>
+            </tr>
+        </thead>
+      </table> 
+      {{/if}}
+    </div>
+</div>
+
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>

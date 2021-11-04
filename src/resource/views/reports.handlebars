@@ -1,0 +1,64 @@
+
+<div class="container">
+    
+    <div class="row">
+    	<div class="col-md-12">
+    		<div class="panel panel-default">
+    			<div class="panel-heading">
+    				<h3 class="panel-title" style="margin-left:5%; margin-top: 10%"><strong>Report of sales for today</strong></h3>
+    			</div>
+                <!-- Total sales here in this table: -->
+                <table class="table table-clear" >
+                        <tbody>
+                            <tr>
+                                    <td class="left">
+                                    <strong></strong>
+                                </td>
+                                    <td class="left">
+                                    <strong></strong>
+                                </td>
+                                    <td class="left text-center" >
+                                    <strong></strong>
+                                </td>
+                                <td class="left" >
+                                    <strong style="text-align:center;">Total</strong>
+                                </td>
+                                <td class="right">{{bill data}}</td><!-- Insert total calculation here -->
+                            </tr>
+                        </tbody>  
+                </table> 
+                <!-- Sales details table (Cho tất cả sales trong ngày vào) -->  
+                <div class="panel-heading">
+    				<h3 class="panel-title" style="margin-left:5%; margin-top: 5%"><strong>Sales details</strong></h3>
+    			</div> 
+    			<div class="panel-body">
+    				<div class="table-wrapper-scroll-y my-custom-scrollbar">
+    					<table class="table table-scroll table-striped">
+    						<thead>
+                                 <tr>
+      								<th scope="col">Bill ID</th>
+      								<th scope="col">Price</th>
+      								<th scope="col">Date</th>
+      								<th scope="col">View</th>
+    							</tr>
+    						</thead>
+    						<tbody>
+    							<!-- foreach ($order->lineItems as $line) or some such thing here -->
+								{{#each data}}
+    							<tr>
+                                    <td>{{this._id}}</td>
+    								<td>{{this.price}}</td>
+    								<td class="text-center">{{this.date}}</td>
+									<td><a href="/news/{{this._id}}">detail</a></td>
+    							</tr>
+                                
+    							{{/each}}
+    						</tbody>
+    					</table>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+</div>  
+     <h2 style="margin-left: 50%;"><a href='/adminmanage' style="color:black";> go back</a></h2>

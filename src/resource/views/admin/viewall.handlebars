@@ -1,0 +1,33 @@
+
+ <div class="container" style ="margin-top:5%;  margin-bottom: 25px;"> 
+   <h1><a href='/adminmanage' style="color:black";> go back</a></h1>
+   <h1><a href='/products/create' style="color:black";> add more</a></h1>
+    <table class="table table-dark table-hover">
+  <thead>
+    <tr>
+      {{!-- <th scope="col">#</th> --}}
+      <th scope="col">Product name </th>
+      <th scope="col">Category </th>
+      <th scope="col">Price</th>
+      <th scope="col" style="text-align:center">Image</th>
+      <th scope="col" style="text-align:center">modify</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each data}}
+    <tr>
+      {{!-- <th scope="row">1</th> --}}
+      <td>{{this.product_name}}</td>
+      <td>{{this.category}}</td>
+      <td>{{this.price}}</td>
+      <td style="width:50%;text-align: center"><img src="../{{this.image}}" style="width: 30%; height:30%;"></td>
+      <td>
+        <a href='edit/{{this._id}}'>update</a> <i class="fas fa-pen-alt"></i> &nbsp;&nbsp;&nbsp;
+        <a href='delete/{{this._id}}'>delete</a> <i class="fas fa-trash"></i>&nbsp;&nbsp;&nbsp;
+        <a href='/products/{{this._id}}'>details</a> <i class="fas fa-info"></i>
+       </td>
+    </tr>
+    {{/each}}
+    </tbody>
+  </table>
+</div>

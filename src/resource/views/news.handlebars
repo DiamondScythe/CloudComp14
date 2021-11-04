@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+    		<div class="invoice-title">
+    			<h2 style="margin-top: 5%;"> Customer Bill</h2><h3 class="pull-right">{{result._id}}</h3>
+    		</div>
+    		<hr>
+    		
+    			<div class="col-xs-6 text-right">
+    				<address >
+    					<strong >Order Date:</strong>
+                        <br>{{result.date}}<br><br>
+    				</address>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    
+    <div class="row">
+    	<div class="col-md-12">
+    		<div class="panel panel-default">
+    			<div class="panel-heading">
+    				<h3 class="panel-title" style="margin-left:5%;"><strong>Order summary</strong></h3>
+    			</div>
+    			<div class="panel-body">
+    				<div class="table-wrapper-scroll-y my-custom-scrollbar">
+    					<table class="table table-scroll table-striped">
+    						<thead>
+                                <tr>
+        							<th class="text-center">Product name</th>
+        							<th class="text-center"><strong>Price</strong></th>
+        							<th class="text-center"><strong>Quantity</strong></th>
+        							<th class="text-right"><strong>Totals</strong></th>
+                                </tr>
+    						</thead>
+    						<tbody>
+    							<!-- foreach ($order->lineItems as $line) or some such thing here -->
+								{{#each arr}}
+    							<tr>
+    								<td>{{this.product_name}}</td>
+    								<td class="text-center">{{this.price}}</td>
+    								<td class="text-center">{{this.quantity}}</td>
+    								<td class="text-right">{{sum this}}</td>
+    							</tr>
+    							{{/each}}	
+    							
+    						</tbody>
+    					</table>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+</div>
+<table class="table table-clear" >
+                            <tbody>
+                                <tr>
+                                     <td class="left">
+                                        <strong></strong>
+                                    </td>
+                                     <td class="left">
+                                        <strong></strong>
+                                    </td>
+                                     <td class="left text-center" >
+                                        <strong></strong>
+                                    </td>
+                                    <td class="left" >
+                                        <strong style="text-align:center;">Total</strong>
+                                    </td>
+                                    <td class="right">{{result.price}}</td>
+                                </tr>
+            </tbody>  
+     </table>    
+     <h2 style="margin-left: 50%;"><a href='/adminmanage' style="color:black";> go back</a></h2>
